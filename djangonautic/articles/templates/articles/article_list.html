@@ -1,22 +1,14 @@
-{% load static from staticfiles  %}
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Articles</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-  </head>
-  <body>
-    <h1>List of Articles</h1>
+{% extends 'base_layout.html' %}
+{% block title %}Articles{% endblock %}
+{% block content %}
+    <h1>Articles</h1>
     <div class="articles">
       {% for article in article_list %}
         <div class="article">
-          <h2><a href="#">{{ article.title }}</a></h2>
+          <h2><a href="{% url 'article:detail' article.slug %}">{{ article.title }}</a></h2>
           <p>{{ article.snippet }}</p>
           <p>{{ article.date }}</p>
         </div>
       {% endfor %}
     </div>
-  </body>
-</html>
+{% endblock %}
