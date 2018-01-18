@@ -33,7 +33,10 @@ def login_view(request):
 			# Login the user
 			user = login_form.get_user()
 			login(request, user)
-			return redirect("articles:list")
+			if 'next' in request.POST:
+				return redirect(request.POST.get("next"))
+			else:
+				return redirect("articles:list")
 	else:
 		login_form = AuthenticationForm()
 		context['login_form'] = login_form
